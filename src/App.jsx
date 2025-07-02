@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Fuse from 'fuse.js';
+import MovieList from './components/MovieList';
+import CSSGrid from './components/CSSGrid';
 
-function App() {
-  const [count, setCount] = useState(0)
+function MovieSearch() {
+    const [movies, setMovies] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filtered, setFiltered] = useState([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {
+        fetch('http://localhost:3000/movies')
+            .then(res => res.json())
+            .then(data => {
+                setMovies(data);
+                setFiltered(data); // initial full list
+            });
+    }, []);
+
+    useEffect(() => {
+        if (!searchTerm) {
+            setFiltered(movies);
+            return;
+        }
+
+        const options = {
+            keys: ['title', 'genres', 'people.primaryName'],
+            threshold: 0.3
+        };
+
+        const fuse = new Fuse(movies, options);
+        const results = fuse.search(searchTerm);
+        setFiltered(results.map(r => r.item));
+    }, [searchTerm, movies]);
+
+    return (
+        // <div>
+        //     <h1>Movie Search</h1>
+        //     <input
+        //         type="text"
+        //         value={searchTerm}
+        //         onChange={e => setSearchTerm(e.target.value)}
+        //         placeholder="Search by title, genre, or actor"
+        //     />
+
+        //     <div style={{ display: "flex", width: "100%" }}>
+        //         <MovieList movies={filtered} />
+        //     </div>
+        // </div>
+
+        <div className='max-w-6xl  mx-auto'>
+            <h1 className='text-red-500'>Hello world</h1>
+            <CSSGrid movies={movies} />
+        </div>
+
+    );
 }
 
-export default App
+export default MovieSearch;
