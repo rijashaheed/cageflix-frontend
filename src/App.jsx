@@ -3,6 +3,7 @@ import MovieList from './components/MovieList';
 import Navbar from './components/Navbar';
 import Slider from './components/Slider';
 import Footer from './components/Footer';
+import Loader from './components/Loader';
 
 function App() {
     const [movies, setMovies] = useState([]);
@@ -24,15 +25,23 @@ function App() {
 
     return (
         <div className="bg-black min-h-screen flex flex-col">
+            {/*Loader*/}
+            {filteredMovies.length == 0 &&
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            }
+            {/*Navbar*/}
             <Navbar
                 movies={movies}
                 setFilteredMovies={(movies) => setFilteredMovies(movies)}
                 setSearchValue={(value) => setSearchValue(value)} />
             {searchValue == "" ? <Slider /> : null}
+            {/*Movies*/}
             <div className='max-w-screen-xl mx-auto px-4 bg-black'>
                 {filteredMovies && filteredMovies.length > 0 ? (
                     <MovieList movies={filteredMovies} />
-                ) : (
+                ) : searchValue != '' ? (
                     <div className="bg-black min-h-screen text-white px-6 py-20 flex justify-center">
                         <div className="max-w-xl w-full text-left space-y-6">
                             <p className="text-lg">
@@ -46,8 +55,9 @@ function App() {
                             </ul>
                         </div>
                     </div>
-                )}
+                ) : null}
             </div>
+            {/*Footer*/}
             <Footer />
         </div>
     );
