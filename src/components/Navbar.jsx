@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import Fuse from 'fuse.js';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-function Navbar({ movies, setFilteredMovies }) {
+function Navbar({ movies, setFilteredMovies, setSearchValue }) {
 
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (!searchTerm) {
+      setSearchValue(searchTerm)
       setFilteredMovies(movies);
       return;
     }
@@ -19,6 +20,7 @@ function Navbar({ movies, setFilteredMovies }) {
 
     const fuse = new Fuse(movies, options);
     const results = fuse.search(searchTerm);
+    setSearchValue(searchTerm)
     setFilteredMovies(results.map(r => r.item));
   }, [searchTerm, movies]);
 
@@ -38,7 +40,7 @@ function Navbar({ movies, setFilteredMovies }) {
           <a href="#" className="hover:text-red-500 transition">Shows</a>
         </div>
       </div>
-      
+
       <div className="relative w-full max-w-xs">
         <input
           type="text"

@@ -5,7 +5,7 @@ import Slider from './components/Slider';
 
 function App() {
     const [movies, setMovies] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchValue, setSearchValue] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
@@ -24,8 +24,9 @@ function App() {
         <div className='bg-black'>
             <Navbar
                 movies={movies}
-                setFilteredMovies={(movies) => setFilteredMovies(movies)} />
-            <Slider />
+                setFilteredMovies={(movies) => setFilteredMovies(movies)}
+                setSearchValue={(value) => setSearchValue(value)} />
+            {searchValue == "" ? <Slider /> : null}
             <div className='max-w-screen-xl mx-auto px-4 bg-black'>
                 <MovieList movies={filteredMovies} />
             </div>
