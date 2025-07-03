@@ -23,7 +23,6 @@ const images = [
 ];
 
 function MovieCard({ movie, movieIdx }) {
-    console.log("movie in movie card", movie)
     let cast = ''
     if (movie) {
         let maxLength = 100
