@@ -22,7 +22,7 @@ function Navbar({ movies, setFilteredMovies }) {
   }, [searchTerm, movies]);
 
   return (
-    <nav className="bg-black text-white px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0 shadow-md">
+    <nav className="sticky top-0 z-10 bg-black text-white px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0 shadow-md">
       {/* Left: Logo + Links */}
       <div className="flex items-center gap-6">
         {/* Logo */}

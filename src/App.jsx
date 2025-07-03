@@ -20,14 +20,14 @@ function MovieSearch() {
 
 
     return (
-        <>
+        <div className='bg-black'>
             <Navbar
                 movies={movies}
                 setFilteredMovies={(movies) => setFilteredMovies(movies)} />
-            <div className='max-w-7xl  mx-auto'>
+            <div className='max-w-7xl  mx-auto bg-black' >
                 <MovieList movies={filteredMovies} />
             </div>
-        </>
+        </div>
 
     );
 }
