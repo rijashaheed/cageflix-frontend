@@ -10,11 +10,12 @@ function App() {
     const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
-        console.log("useEffect 1..")
-        fetch('http://localhost:3000/movies')
+        console.log("useEffect 1..", import.meta.env.VITE_API_URL)
+        // fetch('http://localhost:3000/movies')
+        fetch(`${import.meta.env.VITE_API_URL}/movies`)
             .then(res => res.json())
             .then(data => {
-                console.log("set movies 1")
+                console.log("set movies 1", data)
                 setMovies(data);
                 setFilteredMovies(data); // initial full list
             });
