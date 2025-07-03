@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Fuse from 'fuse.js';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 function Navbar({ movies, setFilteredMovies, setSearchValue }) {
 
@@ -49,7 +50,14 @@ function Navbar({ movies, setFilteredMovies, setSearchValue }) {
           placeholder="Search movies, genres, or actors..."
           className="w-full pl-10 pr-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
         />
-        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+        {searchTerm == "" ?
+          <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
+          /> : null}
+        {searchTerm != "" ?
+          <XMarkIcon
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 cursor-pointer"
+            onClick={() => setSearchTerm("")}
+          /> : null}
       </div>
     </nav>
   );

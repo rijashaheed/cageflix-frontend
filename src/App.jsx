@@ -28,7 +28,23 @@ function App() {
                 setSearchValue={(value) => setSearchValue(value)} />
             {searchValue == "" ? <Slider /> : null}
             <div className='max-w-screen-xl mx-auto px-4 bg-black'>
-                <MovieList movies={filteredMovies} />
+                {filteredMovies && filteredMovies.length > 0 ? (
+                    <MovieList movies={filteredMovies} />
+                ) : (
+                    <div className="bg-black min-h-screen text-white px-6 py-20 flex justify-center">
+                        <div className="max-w-xl w-full text-left space-y-6">
+                            <p className="text-lg">
+                                Your search for <span className="font-semibold">"{searchValue}"</span> did not have any matches
+                            </p>
+                            <p className="text-base font-medium">Suggestions:</p>
+                            <ul className="list-disc list-inside text-sm text-gray-300 space-y-2">
+                                <li>Try different keywords</li>
+                                <li>Try using a film or series title, an actor/actress</li>
+                                <li>Try using a genre such as comedy, horror or documentary</li>
+                            </ul>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
 
