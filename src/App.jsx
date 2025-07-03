@@ -23,7 +23,7 @@ function App() {
 
 
     return (
-        <div className='bg-black'>
+        <div className="bg-black min-h-screen flex flex-col">
             <Navbar
                 movies={movies}
                 setFilteredMovies={(movies) => setFilteredMovies(movies)}
