@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
 import Navbar from './components/Navbar';
 import Slider from './components/Slider';
+import Footer from './components/Footer';
 
 function App() {
     const [movies, setMovies] = useState([]);
@@ -46,8 +47,8 @@ function App() {
                     </div>
                 )}
             </div>
+            <Footer />
         </div>
-
     );
 }
 
