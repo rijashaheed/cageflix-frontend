@@ -1,29 +1,26 @@
-// // src/components/Navbar.jsx
-// import React from 'react';
+import { useState, useEffect } from 'react';
+import Fuse from 'fuse.js';
 
-// function Navbar({ searchTerm, setSearchTerm }) {
-//   return (
-//     <nav className="bg-black text-white px-4 py-3 flex items-center justify-between shadow-md">
-//       {/* Logo */}
-//       <div className="text-2xl font-bold text-red-600 tracking-tight">
-//         Cage<span className="text-white">flix</span>
-//       </div>
+function Navbar({ movies, setFilteredMovies }) {
 
-//       {/* Search Input */}
-//       <input
-//         type="text"
-//         value={searchTerm}
-//         onChange={(e) => setSearchTerm(e.target.value)}
-//         placeholder="Search movies, genres, or actors..."
-//         className="w-full max-w-xs px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
-//       />
-//     </nav>
-//   );
-// }
+  const [searchTerm, setSearchTerm] = useState('');
 
-// export default Navbar;
+  useEffect(() => {
+    if (!searchTerm) {
+      setFilteredMovies(movies);
+      return;
+    }
 
-function Navbar({ searchTerm, setSearchTerm }) {
+    const options = {
+      keys: ['title', 'genres', 'people.primaryName'],
+      threshold: 0.3
+    };
+
+    const fuse = new Fuse(movies, options);
+    const results = fuse.search(searchTerm);
+    setFilteredMovies(results.map(r => r.item));
+  }, [searchTerm, movies]);
+
   return (
     <nav className="bg-black text-white px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0 shadow-md">
       {/* Left: Logo + Links */}
