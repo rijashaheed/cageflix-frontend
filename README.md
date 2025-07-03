@@ -1,11 +1,11 @@
-🎬 Cageflix
+**🎬 Cageflix**
 Working Demo:
 👉 https://cageflix-frontend-eight.vercel.app/
 
 ⚠️ Important Note:
 Since the IMDb dataset doesn't include images, a set of 10–12 sample pictures is used repeatedly across movies. While search functionality works correctly, please don’t be confused by unrelated visuals.
-
-⚙️ Setup Instructions
+**
+⚙️ Setup Instructions**
 Frontend
 Clone this repository:
 git clone https://github.com/rijashaheed/cageflix-frontend.git
