@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
 import Navbar from './components/Navbar';
+import Slider from './components/Slider';
 
-function MovieSearch() {
+function App() {
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
@@ -24,7 +25,8 @@ function MovieSearch() {
             <Navbar
                 movies={movies}
                 setFilteredMovies={(movies) => setFilteredMovies(movies)} />
-            <div className='max-w-7xl  mx-auto bg-black' >
+            <Slider />
+            <div className='max-w-screen-xl mx-auto px-4 bg-black'>
                 <MovieList movies={filteredMovies} />
             </div>
         </div>
@@ -32,4 +34,4 @@ function MovieSearch() {
     );
 }
 
-export default MovieSearch;
+export default App;
