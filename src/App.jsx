@@ -10,7 +10,7 @@ function App() {
     const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
-        console.log("useEffect 1..", import.meta.env.VITE_API_URL)
+        console.log("useEffect..", import.meta.env.VITE_API_URL)
         // fetch('http://localhost:3000/movies')
         fetch(`${import.meta.env.VITE_API_URL}/movies`)
             .then(res => res.json())
